@@ -1,5 +1,3 @@
-//@ts-check
-
 var cDim = 20;
 var gridDim = 30;
 var alg;
