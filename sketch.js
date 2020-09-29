@@ -1,11 +1,16 @@
-var cDim = 20;
-var gridDim = 30;
+//@ts-check
+
+var cDim = 70;
+var gridX;
+var gridY;
 var alg;
 
 // 20x20 grid with 30x30 pixel boxes
 function setup() {
-    createCanvas(600, 600);
-    alg = new algorithms(cDim, gridDim, "depthfirst");
+    createCanvas(displayWidth, displayHeight - 150);
+    gridX = Math.floor(displayWidth/cDim);
+    gridY = Math.floor((displayHeight - 150)/cDim);
+    alg = new algorithms(cDim, gridX, gridY, "depthfirst");
     alg.reset();
 }
 

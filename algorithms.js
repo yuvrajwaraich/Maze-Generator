@@ -1,15 +1,19 @@
+//@ts-check
 var cells;
 var stack = [];
 var current;
 var weight = 2;
+var startX = 0;
+var startY = 0;
 
 class algorithms {
-    constructor(cellDimension, gridDimension, alg) {
+    constructor(cellDimension, gridX, gridY, alg) {
         this.cellDim = cellDimension;
-        this.gridDim = gridDimension;
+        this.gridX = gridX;
+        this.gridY = gridY;
 
         if (alg == "depthfirst") {
-            this.alg = new depthfirst(this.cellDim, this.gridDim);
+            this.alg = new depthfirst(this.cellDim, this.gridX, this.gridY);
         }
     }
 
@@ -23,32 +27,31 @@ class algorithms {
 
 }
 
-function depthfirst(cellDimension, gridDimension) {
+function depthfirst(cellDimension, gridX, gridY) {
     this.cellDim = cellDimension;
-    this.gridDim = gridDimension;
+    this.gridX = gridX;
+    this.gridY = gridY;
 
     this.reset = function () {
-        cells = new Array(gridDim);
+        cells = new Array(gridX);
         stack = [];
 
-        for (let i = 0; i < gridDim; i++) {
-            cells[i] = new Array(gridDim);
+        for (let i = 0; i < gridX; i++) {
+            cells[i] = new Array(gridY);
         }
 
-        for (let x = 0; x < this.gridDim; x++) {
-            for (let y = 0; y < this.gridDim; y++) {
+        for (let x = 0; x < this.gridX; x++) {
+            for (let y = 0; y < this.gridY; y++) {
                 cells[x][y] = new cell(x, y);
             }
         }
-        cells[0][0].visited = true;
-        stack.push(cells[0][0]);
+        cells[startX][startY].visited = true;
+        stack.push(cells[startX][startY]);
     }
 
     this.drawSketch = function () {
-
-
-        for (let i = 0; i < this.gridDim; i++) {
-            for (let j = 0; j < this.gridDim; j++) {
+        for (let i = 0; i < this.gridX; i++) {
+            for (let j = 0; j < this.gridY; j++) {
                 cells[i][j].show();
             }
         }
@@ -136,13 +139,13 @@ function cell(x, y) {
 
     this.getNeighbours = function () {
         var neighbours = [];
-        if (this.x + 1 < gridDim && !cells[this.x + 1][this.y].visited) {
+        if (this.x + 1 < gridX && !cells[this.x + 1][this.y].visited) {
             neighbours.push(cells[this.x + 1][this.y]);
         }
         if (this.x - 1 > -1 && !cells[this.x - 1][this.y].visited) {
             neighbours.push(cells[this.x - 1][this.y])
         }
-        if (this.y + 1 < gridDim && !cells[this.x][this.y + 1].visited) {
+        if (this.y + 1 < gridY && !cells[this.x][this.y + 1].visited) {
             neighbours.push(cells[this.x][this.y + 1]);
         }
         if (this.y - 1 > -1 && !cells[this.x][this.y - 1].visited) {
