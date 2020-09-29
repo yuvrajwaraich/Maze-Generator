@@ -1,4 +1,3 @@
-//@ts-check
 var cells;
 var stack = [];
 var current;
